@@ -7,6 +7,7 @@ def isValidSubsequence(array, sequence):
     # firstArray = [1,2,3,4], secondArray = [1,5,3,4]
     # A. It would return false.
 
+    # ATTEMPT #1 (Incorrect):
     index = float('-inf')
     # Check if the second value in the sequence in array. If it is, 
     # and the index at which it is stored is greater than the last index,
@@ -22,4 +23,12 @@ def isValidSubsequence(array, sequence):
                 
     return True
 
-# Currently, this is incorrect.
+    ATTEMPT #2 (Using hint):
+    j = 0
+    for i in range(0, len(array)):
+        if array[i] == sequence[j]:
+            j += 1
+            if j == len(sequence):
+                return True
+    return False
+
