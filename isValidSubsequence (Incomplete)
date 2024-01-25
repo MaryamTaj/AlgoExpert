@@ -1,0 +1,23 @@
+def isValidSubsequence(array, sequence):
+    # Write your code here.
+    # Clarify assumptions:
+    # Q. How do you deal with empty arrays? Ans. You only deal with non-empty
+    # arrays of integers
+    # Q. What if most of the numbers are in the first array, but not all? 
+    # firstArray = [1,2,3,4], secondArray = [1,5,3,4]
+    # A. It would return false.
+
+    index = float('-inf')
+    # Check if the second value in the sequence in array. If it is, 
+    # and the index at which it is stored is greater than the last index,
+    # keep iterating through the sequence.
+    for i in range(0, len(sequence)):
+        for j in range(index, len(array)):
+            # Check if the sequence's value is in the array.
+                if array[j] == sequence[i]:
+                    index = j
+                    break
+
+        return False
+                
+    return True
