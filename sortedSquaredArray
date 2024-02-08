@@ -1,0 +1,20 @@
+def sortedSquaredArray(array):
+    # 1. Clarify assumptions:
+    # Can you have an empty array? No.
+    # Are the integers distinct? Yes, because the list is sorted in ascending
+    # order, not non-descending order.
+    # Can you have negative values? Yes, and this is important because 
+    # they can affect the ascending order of the array postcondition.
+    # E.g. [-2, -1] should return [1, 4]
+
+    # 2. Write pseudo-code.
+    # Initialize an empty array, squared_array.
+    squared_array = []
+    # Iterate through the original array.
+    for i in range(0, len(array)):
+        # At each iteration, square the value and append it to squared_array.
+        square = array[i] * array[i]
+        squared_array.append(square)
+    # Sort and return the squared_array.
+    squared_array.sort()
+    return squared_array
