@@ -1,0 +1,37 @@
+def tournamentWinner(competitions, results):
+    # 1. Clarify assumptions:
+    
+    # Why do we need to know that each team is a string of at 
+    # most 30 characters? ...
+    # Can there be ties? No.
+    # Can competitions look like [[]]? No, we will not have empty arrays.
+
+    # 2. Write pseudo-code.
+    
+    # Initialize a empty dictionary that will ultimately store all the teams
+    # and their associated scores.
+    teams = {}
+    
+    # Iterate through competitions.
+    for i in range(0, len(competitions)):
+
+        home_team, away_team = competitions[i][0], competitions[i][1]
+        
+        # A 0 in the results array means that the away team has won, 
+        # so increment their score by 3.
+        if results[i] == 0:
+            if away_team in teams:
+                teams[away_team] += 3
+            else:
+                teams[away_team] = 3
+
+        # A 1 in the results array means that the home team has won, so
+        # increment their score by 3. 
+        else: 
+            if home_team in teams:
+                teams[home_team] += 3
+            else:
+                teams[home_team] = 3
+
+    # Return the team with the maximum score.
+    return max(teams, key = teams.get)
