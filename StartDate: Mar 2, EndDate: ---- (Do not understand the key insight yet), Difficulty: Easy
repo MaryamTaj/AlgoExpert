@@ -1,0 +1,32 @@
+# 1. Clarify assumptions:
+# Q. Can you have an empty array? Yes. It means you are given no coins, and
+# the minimum amount of change that you can't create is 1. 
+# Q. Are the given coins unique? No.
+# Q. Do the given coins match the real-world coins? Ex. 1 cent, 5 cent, 10 cent
+# 25 cent, etc.? No.
+# Q. Can you reuse coins? No. Ex. [1, 2, 4]. I cannot do 1 + 2 + 2 to create 5
+# cents. I would have to do 1 + 4.
+def nonConstructibleChange(coins):
+    # 2. Write pseudocode:
+
+    # When coins does not contain 1 cent, or if it is empty, the minimum amount
+    # of change you can't create is 1.
+    if 1 not in coins or coins == []:
+        return 1
+    else:
+        # Sort the coins in ascending order.
+        coins.sort()
+        change = 0
+        # Iterate through the coins array, adding 1 coin at a time to the
+        # amount of change you can make.
+        for i in range(0, len(coins)):
+            # Key insight: If the coin you are adding is larger than the
+            # change you can currently make + 1, then the minimum amount of 
+            # change you cannot make is your current change + 1
+            if coins[i] > change + 1:
+                return change + 1
+            change += coins[i]
+            
+        # Otherwise, the minimum amount of change change you cannot make is 
+        # the sum of all the coins + 1.
+        return change + 1  
