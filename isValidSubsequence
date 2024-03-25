@@ -32,3 +32,52 @@ def isValidSubsequence(array, sequence):
                 return True
     return False
 
+    ATTEMPT #3 (March 24; Inefficient, but correct without using hint):
+    
+    def isValidSubsequence(array, sequence):
+    # 1. Clarify assumptions.
+    # Q. Suppose sequeunce repeats an integer that is in array. Is it a 
+    # valid subsequence? Ex. Array = [1,2,3,4], Sequence = [2,2,2]
+    # 2. Write pseudocode.
+
+    idealSequence = []
+    # Case 1: There is only one element. In this case, check if the element
+    # is in the array
+    if len(sequence) == 1 and sequence[0] in array:
+        return True
+     # Case 2: The sequence is the array itself
+    elif sequence == array:
+        return True  
+    # Case 3: The elements of the sequence are not in the array.
+    for i in range(len(sequence)):
+        if sequence[i] not in array:
+            return False
+    # Case 4: The array contains duplicate elements, and the sequence
+    # contains the same duplicate elements.
+    count = 0
+    duplicateValue = array[0]
+    for i in range(len(array)):
+        if array[i] == duplicateValue:
+            count += 1
+    if count == len(array):
+        for i in range(len(sequence)):
+            if sequence[i] not in array:
+                return False
+        return True
+    else:               
+    # Case 5: The elements of the sequence are in the array, but they are in 
+    # the wrong order.
+        for i in range(len(array)):
+            # Access index of element in array, that is both in array and 
+            # subsequence. Create what the subsequence should ideally look
+            # like, if it preserves the order. Compare sequence with ideal
+            # Sequence.
+            if array[i] in sequence:
+                idealSequence.append(array[i])
+    
+        
+        if idealSequence == sequence:
+            return True
+        else: 
+            return False
+
