@@ -1,0 +1,28 @@
+# 1. Clarify any assumptions.
+# Q. Can we repeat integers in the triplets? Ex. [[1,2,3], [1,4,0]], where
+# we repeat the integer 1. A. Yes.
+def threeNumberSum(array, targetSum):
+    # Write your code here.
+    # 2. Write pseudocode.
+    triplet_array = []
+    for int1 in array:
+        for int2 in array:
+            # Make arrays using two random integers in the array.
+            if int1 != int2:
+                triplet = [int1, int2]
+            for int3 in array:
+                # Make a triplet if the third integer + sum of two random
+                # integers = target sum.
+                if int1 != int2 and int1 != int3 and int2 != int3:
+                    if int1 + int2 + int3 == targetSum:
+                        # sort the integers inside each triplet in ascending order.
+                        triplet = [int1, int2, int3]
+                        triplet.sort()
+                        if triplet not in triplet_array:
+                            triplet_array.append(triplet)
+
+    # sort the triplets in ascending order.
+    triplet_array.sort()
+
+
+    return triplet_array
