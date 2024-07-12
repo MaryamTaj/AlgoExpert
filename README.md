@@ -1,4 +1,4 @@
-# AlgoExpert
+# AlgoExpert-NeetCode
 This repository tracks my progress in completing technical interview questions. 
 I use the following format to answer questions: 
 1. Consider edge cases.
