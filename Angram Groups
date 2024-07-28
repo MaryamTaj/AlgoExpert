@@ -1,0 +1,59 @@
+My solution: Use an array -> O(m*nlogn)
+# 1. Clarify any assumptions
+# Can the input array of strings contain no strings? Yes. If strs = [""],
+# output = [[""]]
+# Suppose a string uses the same characters as another string, but
+# both strings have different lengths. Is it considered an anagram?
+# No.
+# Can I return the anagrams in any order? Yes.
+# 2. Outline the solution using pseudo-code
+# 3. Write the whole solution
+# 4. Test your solution
+class Solution:
+    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+        # Case 1: The input is an empty string.
+        if strs == [""]: return [[""]]
+    
+        # Case 2: The input only contains a single string.
+        if len(strs) == 1: return [[strs[0]]]
+
+        # Case 3: The input contains more than one string.
+        anagrams = []
+        for word in strs:
+            # Store all the characters in a specific word. Sort
+            # the characters alphabetically.
+            chars = [word[i] for i in range(0, len(word))]
+            chars.sort()
+
+            # If another word has the same characters, group it as an
+            # anagram, and append to the anagrams array
+            anagram = []
+            for string in strs:
+                compare_chars = [string[i] for i in range(0, len(string))]
+                compare_chars.sort()
+                if chars == compare_chars:
+                    anagram.append(string)
+            anagrams.append(anagram)
+        
+        print(anagrams)
+        # Remove duplicates.
+        for anagram in anagrams:
+            anagrams.remove(anagram)
+            if anagram in anagrams:
+                continue
+            else:
+                anagrams.append(anagram)
+    
+        return anagrams
+
+Optimal solution: Use a dictionary -> O(mn)
+class Solution:
+    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+        ans = defaultdict(list)
+
+        for s in strs:
+            count = [0] * 26
+            for c in s:
+                count[ord(c) - ord("a")] += 1
+            ans[tuple(count)].append(s)
+        return ans.values()
