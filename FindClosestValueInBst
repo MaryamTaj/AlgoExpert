@@ -1,0 +1,36 @@
+import math
+
+def findClosestValueInBst(tree, target):
+    initial_closest = math.inf
+    closest = findClosestValueInBstAug(tree, target, initial_closest)
+    return closest
+
+def findClosestValueInBstAug(tree, target, closest):
+    curr_closest = closest
+    
+    if tree == None:
+        return curr_closest
+    else:
+        curr_diff = abs(curr_closest - target)
+        potential_diff = abs(tree.value - target)
+        if potential_diff < curr_diff:
+            curr_closest = tree.value
+    
+        if target == tree.value:
+            curr_closest = tree.value
+            return curr_closest
+        elif target < tree.value:
+            return findClosestValueInBstAug(tree.left, target, curr_closest)
+        elif target > tree.value:
+            return findClosestValueInBstAug(tree.right, target, curr_closest)
+   
+
+        
+
+
+# This is the class of the input tree. Do not edit.
+class BST:
+    def __init__(self, value):
+        self.value = value
+        self.left = None
+        self.right = None
