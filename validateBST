@@ -5,7 +5,7 @@ class BST:
         self.left = None
         self.right = None
 
-
+# Key insight: In a valid BST, each node < closest right parent and node >= closest left parent.
 def validateBst(tree):
     # Write your code here.
     return validateBstHelper(tree, float("-inf"), float("inf"))
