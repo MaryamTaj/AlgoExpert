@@ -1,0 +1,77 @@
+def inOrderTraverse(tree, array):
+    # Write your code here.
+    # Overview: [inOrderTraverse(tree.left), tree.root, inOrderTraverse(tree.right)]
+    # Approach 1: 
+    # pre_array = inOrderTraverse(tree.left, array)
+    # root = tree.root
+    # post_array = inOrderTraverse(tree.right)
+    # final_array = pre_array + [root] + post_array
+    # return final_array
+
+    # Approach 2: We need to use the argument array.
+    if tree is None:
+        return []
+    if tree.left != None and tree.right != None:
+        left_array = inOrderTraverse(tree.left, [])
+        right_array = inOrderTraverse(tree.right, [])
+        return left_array + [tree.value] + right_array
+    elif tree.left != None:
+        left_array = inOrderTraverse(tree.left, [])
+        return left_array + [tree.value]
+    elif tree.right != None:
+        right_array = inOrderTraverse(tree.right, [])
+        return [tree.value] + right_array
+    else:
+        return [tree.value]
+        
+
+def preOrderTraverse(tree, array):
+    # Write your code here.
+    # Case 1: tree is empty
+    if tree is None:
+        return []
+    # Case 2: tree has left subtree + right subtree
+    elif tree.left != None and tree.right != None:
+        # Process the root
+        root_value = [tree.value]
+        # Process the left subtree
+        left_values = preOrderTraverse(tree.left, [])
+        # Process the right subtree
+        right_values = preOrderTraverse(tree.right, [])
+        return root_value + left_values + right_values
+    # Case 3: tree only has left subtree
+    elif tree.left != None:
+        root_value = [tree.value]
+        left_values = preOrderTraverse(tree.left, [])
+        return root_value + left_values
+    # Case 4: tree only has right subtree
+    else:
+        root_value = [tree.value]
+        right_values = preOrderTraverse(tree.right, [])
+        return root_value + right_values
+        
+        
+    
+
+
+def postOrderTraverse(tree, array):
+    # Write your code here.
+    # Case 1: tree is empty
+    if tree is None:
+        return []
+    # Case 2: tree has left subtree + right subtree
+    elif tree.left != None and tree.right != None:
+        left_values = postOrderTraverse(tree.left, [])
+        right_values = postOrderTraverse(tree.right, [])
+        root_value = [tree.value]
+        return left_values + right_values + root_value
+    # Case 3: tree only has left subtree
+    elif tree.left != None:
+        left_values = postOrderTraverse(tree.left, [])
+        root_value = [tree.value]
+        return left_values + root_value
+    # Case 4: tree only has right subtree
+    else:
+        right_values = postOrderTraverse(tree.right, [])
+        root_value = [tree.value]
+        return right_values + root_value
