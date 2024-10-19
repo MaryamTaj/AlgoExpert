@@ -81,3 +81,33 @@ def isValidSubsequence(array, sequence):
         else: 
             return False
 
+# Approach #4 (October 19, 2024): Intuitive
+# 1. Clarify:
+# Is [1] a subsequence for the array [1]? Yes.
+
+# 2. Write pseudocode:
+# Counter = -1
+# Iterate through the array. Everytime I encounter a value that is in the 
+# array and the sequence, I will increment the counter.
+# I will then check if sequence[counter] == value.
+
+# 3. Write code:
+    counter = -1
+
+    # Case 1: Sequence is a larger array than array.
+    if len(sequence) > len(array):
+        return False
+        
+    for i in range(0, len(array)):
+        if array[i] in sequence: 
+            counter += 1
+            # Case 2: The order of the values in sequence is incorrect.
+            if sequence[counter] != array[i]: 
+                return False
+            # Case 3: The order of the values is correct, and we have reached
+            # the end of sequence.
+            if counter == len(sequence) - 1:
+                return True
+    # Case 4: Array = [1,2,3,4]. Sequence = [1,2,3,3]. We have traversed the 
+    # array, but we have not reached the end of sequence.
+    return False
