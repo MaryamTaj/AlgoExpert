@@ -1,5 +1,34 @@
 import math
 
+# Approach #2 (October 19, 2024):
+def findClosestValueInBst(tree, target):
+    # Approach #3: Use the following video (https://www.youtube.com/watch?v=uYWxgNFJDPg)
+    minValue = float('inf')
+    minDiff = float('inf')
+    return findClosestValue(tree, target, minValue, minDiff)
+
+def findClosestValue(tree, target, minValue, minDiff):
+    print(minValue)
+    currDiff = abs(target - tree.value)
+    if currDiff < minDiff:
+        minDiff = currDiff
+        minValue = tree.value
+    if tree is None:
+        return minValue
+    if target == tree.value:
+        return minValue
+    if target < tree.value:
+        if tree.left is None:
+            return minValue
+        return findClosestValue(tree.left, target, minValue, minDiff)
+            
+    if target > tree.value:
+        if tree.right is None:
+            return minValue
+            
+        return findClosestValue(tree.right, target, minValue, minDiff)
+
+# Approach #1:
 def findClosestValueInBst(tree, target):
     initial_closest = math.inf
     closest = findClosestValueInBstAug(tree, target, initial_closest)
