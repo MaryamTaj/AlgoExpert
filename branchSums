@@ -1,0 +1,51 @@
+# This is the class of the input root. Do not edit it.
+class BinaryTree:
+    def __init__(self, value):
+        self.value = value
+        self.left = None
+        self.right = None
+
+
+def branchSums(root):
+    # 1. Clarify assumptions.
+    # Does order matter? Yes, it needs to return sums from the leftmost branch
+    # to the rightmost branch.
+    # Is the sum of a leaf node = [leaf.value]? Yes.
+    # 2. Identify initial solution. Write pseudocode.
+    # Base case: If you are a leaf node, branchSum = [leaf.value]
+    if root.left is None and root.right is None:
+        branchSum = [root.value]
+        return branchSum
+    # Recursive case:
+    # Case 1: You have a left and right subtree. In this case, call branchSums
+    # on the left subtree, and the right subtree. Concatenate them. Add the 
+    # root.value to each value in the list.
+    elif root.left is not None and root.right is not None:
+        leftBranchSum = branchSums(root.left)
+        rightBranchSum = branchSums(root.right)
+        branchSum = leftBranchSum + rightBranchSum
+        for i in range(0, len(branchSum)):
+            branchSum[i] += root.value
+        return branchSum
+            
+    # Case 2: You only have a left subtree. In this case, call branchSums on 
+    # the left subtree. Add the root.value to each value in the list.
+    elif root.left is not None:
+        leftBranchSum = branchSums(root.left)
+        branchSum = leftBranchSum 
+        for i in range(0, len(branchSum)):
+            branchSum[i] += root.value
+        return branchSum
+        
+    # Case 3: You only have a right subtree. In this case, call branchSums on
+    # the right subtree. Add the root.value to each value in the list.
+    elif root.right is not None:
+        rightBranchSum = branchSums(root.right)
+        branchSum = rightBranchSum 
+        for i in range(0, len(branchSum)):
+            branchSum[i] += root.value
+        return branchSum
+    
+    # 3. Write code.
+    # 4. Test code.
+    # 5. Optimize code (runtime analysis) = O(n).
