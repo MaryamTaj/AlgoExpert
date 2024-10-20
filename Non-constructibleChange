@@ -29,4 +29,26 @@ def nonConstructibleChange(coins):
             
         # Otherwise, the minimum amount of change change you cannot make is 
         # the sum of all the coins + 1.
-        return change + 1  
+        return change + 1 
+
+# Approach #2 (October 19, 2024):
+    # Use the following website:
+    # https://stackoverflow.com/questions/67099988/how-to-devise-this-solution-to-non-constructible-change-challenge-from-algoexper
+
+    # Sort the array.
+    coins.sort()
+    
+    # Initialize change created.
+    changeCreated = 0
+    
+    for coin in coins:
+        # If the next coin is greater than constructible change + 1, you
+        # can create 1....constructible change = sum(coins_so_far). To create
+        # constructible change + 1, you need the next coin <= constructible change
+        # + 1. Otherwise, you will not be able to create constructible change + 1.
+        if coin > changeCreated + 1:
+            return changeCreated + 1
+        changeCreated += coin
+    
+    # You cannot create the sum(coins) + 1.
+    return changeCreated + 1
