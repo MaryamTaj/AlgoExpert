@@ -1,0 +1,41 @@
+def generateDocument(characters, document):
+    # 1. Clarify.
+    # What if you need to generate ""? Return True.
+    # What if you have "" characters? Return False.
+    # Can document have a character that does not exist in characters? Yes.
+    # 2. Identify initial solution. Write pseudocode.
+    # Edge case: Handle document = ""
+    if document == "":
+        return True
+    # Initialize a set that will store each unique character.
+    uniqueSet = set(document)
+    # Populate a charDictionary and docDictionary with the unique set, and the 
+    # respective count = 0
+    charDict = {}
+    docDict = {}
+    for uniqueChar in uniqueSet:
+        charDict[uniqueChar] = 0
+        docDict[uniqueChar] = 0
+        
+    # Iterate through characters. If you see a character, 
+    # increment its count by 1 in the dictionary.
+    for char in characters:
+        if char in charDict:
+            charDict[char] += 1
+    
+    # Iterate through document. If you see a character, increment its count
+    # by 1.
+    for char in document:
+        docDict[char] += 1
+    
+    # Compare charDictionary and docDictionary.
+    for uniqueChar in docDict:
+        if docDict[uniqueChar] > charDict[uniqueChar]:
+            return False
+
+    return True
+        
+    # 3. Write code.
+    # 4. Test your code.
+    # 5. Optimize your code (runtime analysis) = O(n + m), n = number of characters
+    # and m = length of document
