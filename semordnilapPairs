@@ -1,0 +1,24 @@
+def semordnilap(words):
+    # Write your code here.
+    # 1. Clarify assumptions.
+    # Can I receive empty strings?
+    # 2. Identify initial solution. Write pseudocode.
+    # Initialize semordnilap pairs = [].
+    semordnilapPairs = []
+    # Iterate through words.
+    for word in words:
+        string = ""
+        # Iterate through word backwards. If resulting string is in words, 
+        # and not in semordnilap pairs, group them and append them to semordnilap
+        # pairs.
+        for i in range(len(word) - 1, -1, -1):
+            string += word[i]
+        if string in words and string != word and [word, string] not in semordnilapPairs and [string, word] not in semordnilapPairs:
+            semordnilapPairs.append([word, string])
+   
+    # return semordnilap pairs.
+    return semordnilapPairs
+    # 3. Write code.
+    # 4. Test code.
+    # 5. Optimize code (runtime analysis) = O(n * m), n = number of words and
+    # m = length of longest word.
