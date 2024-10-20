@@ -1,0 +1,32 @@
+def firstNonRepeatingCharacter(string):
+    # Write your code here.
+    # 1. Clarify assumptions.
+    # Will the output be a non-negative integer? Yes.
+    # What happens when you do not have any non-repeating characters? Return -1
+    # 2. Identify intial solution. Write pseudocode.
+    # Initialize a set that stores all the unique characters in the string.
+    uniqueSet = set(string)
+    # Initialize countDict which stores each unique characters' count. 
+    countDict = {}
+    # Initialize indexDict which stores each unique characters' index.
+    indexDict = {}
+    for uniqueChar in uniqueSet:
+        countDict[uniqueChar] = 0
+        indexDict[uniqueChar] = 0
+        
+    # Iterate through string.
+    # When you encounter a character, increment countDict[char] by 1. Store index.
+    for i in range(0, len(string)):
+        char = string[i]
+        countDict[char] += 1
+        indexDict[char] = i
+   
+    # Iterate through countDict. As soon as you encounter a value of 1, 
+    # look up the index in indexDict. Return the index. Else, return -1
+    for key in countDict:
+        if countDict[key] == 1:
+            return indexDict[key]
+    return -1
+    # 3. Write code.
+    # 4. Test code.
+    # 5. Optimize the code (runtime analysis) = 0(n).
