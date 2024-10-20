@@ -1,0 +1,33 @@
+def runLengthEncoding(string):
+    # 1. Clarify.
+    # Can the input string have any characters? Ex. "1"? Yes.
+    # What is the output type(i.e., run-length encoding)? String.
+    
+    # 2. Identify initial solution. Write pseudocode.
+    # Initialize array.
+    encodedStringCharacters = []
+    # Initialize currentRunLength = 1.
+    currRunLength = 1
+    # Iterate through the string, starting from the second letter.
+    for i in range(1, len(string)):
+        prevCharacter = string[i - 1]
+        currCharacter = string[i]
+    # If the previous char. and current char are different, or currentRunLength = 9 
+    # (In this case, currCharacter = 10th consecutive letter), append the 
+    # currentRunLength and previousCharacter to the array.
+        if prevCharacter != currCharacter or currRunLength == 9:
+            encodedStringCharacters.append(str(currRunLength))
+            encodedStringCharacters.append(prevCharacter)
+            currRunLength = 0
+    # Increment currentRunLength by 1.
+        currRunLength += 1
+
+    # Handle the last run.
+    encodedStringCharacters.append(str(currRunLength))
+    encodedStringCharacters.append(string[len(string) - 1])
+    
+    # Join the array.
+    return "".join(encodedStringCharacters)
+    # 3. Write your code.
+    # 4. Test your code.
+    # 5. Optimize your code (runtime analysis) = O(n)
