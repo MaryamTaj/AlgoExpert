@@ -1,0 +1,27 @@
+def commonCharacters(strings):
+    # 1. Clarify.
+    # Ex. ["aabc", "abc"] => ["a", "b", "c"]. Correct.
+    # 2. Identify an initial solution. Write pseudocode.
+    # Initialize an empty array commonChars.
+    commChars = []
+    # Iterate through the first string.
+    firstString = strings[0]
+    for char in firstString:
+        # Iterate through the array of strings.
+        # If each character in the first string is in the rest of the strings, append the
+        # character to commChars.
+        value = all(char in string for string in strings)
+        if value and char not in commChars:
+            commChars.append(char)
+    # return commChars.
+    return commChars
+    
+    # 3. Write your code.
+    # 4. Test your code.
+    # 4. Optimize your code (runtime analysis) = O(n^2 * m). 
+    # a = length of first string.
+    # m = # of strings
+    # n = length of largest string
+    # Notice that a <= n.
+    # So, you iterate the loop n times at most. In each iteration, you take
+    # n * m steps = n * n * m = n^2 * m.
