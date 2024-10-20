@@ -1,0 +1,32 @@
+def caesarCipherEncryptor(string, key):
+    # 1. Clarify.
+    # Is 0 a possible key? Yes.
+    # What happens if you are at the end of the alphabet, and you need to shift?
+    # You wrap around the alphabet.
+    # 2. Identify initial solution. Write pseudocode.
+    # Initialize a shiftedString = ''
+    shiftedString = ""
+    # Iterate through the input string.
+    for letter in string:
+    # Find each letter's position in the alphabet.
+        ascii = ord(letter)
+        print(f"ascii: {ascii}")
+    # Shift the position by adding key.
+        newAscii = ascii + (key % 26)
+        print(f"newAscii: {newAscii}")
+    # Wrap around the alphabet.
+        if newAscii > 122:
+            newAscii = 96 + (newAscii - 122)
+        print(f"newAscii: {newAscii}")
+        
+    # Append to shiftedString.
+        shiftedString += (chr(newAscii))
+        print(f"char: {chr(newAscii)}")
+        print(f"shiftedString: {shiftedString}")
+
+    return shiftedString
+    
+    # 3. Write your code.
+    # 4. Test your code. 
+    # 5. Optimize your code (runtime analysis) = O(n^2), due to string 
+    # concatenation.
