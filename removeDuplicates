@@ -1,0 +1,25 @@
+# This is an input class. Do not edit.
+class LinkedList:
+    def __init__(self, value):
+        self.value = value
+        self.next = None
+
+
+def removeDuplicatesFromLinkedList(linkedList):
+    # 1. Clarify assumptions.
+    # 2. Identify initial solution. Write pseudocode.
+    # Go through each node sequentially.
+    currentNode = linkedList
+    while currentNode is not None: 
+        nextDistinctNode = currentNode.next
+        while nextDistinctNode is not None and nextDistinctNode.value == currentNode.value:
+            nextDistinctNode = nextDistinctNode.next
+        
+        currentNode.next = nextDistinctNode
+        currentNode = nextDistinctNode
+
+
+    return linkedList
+    # 3. Write code.
+    # 4. Test code.
+    # 5. Optimize code (runtime analysis) = O(n)
