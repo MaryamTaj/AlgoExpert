@@ -1,0 +1,43 @@
+def nodeDepths(root):
+    # 1. Clarify assumptions.
+    # What is the depth of a root node? 0
+    # What if the binary tree is None? 0
+    # Is depth = # of lines between root and node? Yes.
+    # 2. Identify an initial solution. Write pseudocode.
+    # Approach #1:
+    # Calculate the left subtree's depth.
+    # Calculate the right subtree's depth.
+    # binary tree's depth = left subtree's depth * # of nodes in left subtree
+    # + right subtree's depth * # of nodes in right subtree
+
+    # Approach #2:
+    totalDepth = subtreeDepth(root, depth=0)
+    return totalDepth
+
+def subtreeDepth(root, depth):
+    # At the root node, the depth = 0.
+    # As you travel right, increase the depth by 1 until you reach a leaf node.
+    # As you travel left, increase the depth by 1 until you reach a leaf node.
+    # total depth = right + left
+    # The tree has a left and right subtree.
+    if root.left is not None and root.right is not None:
+        leftDepth = subtreeDepth(root.left, depth + 1)
+        rightDepth = subtreeDepth(root.right, depth + 1)
+        totalDepth = leftDepth + rightDepth + depth
+        return totalDepth
+    # The tree has a left subtree.
+    elif root.left is not None:
+        leftDepth = subtreeDepth(root.left, depth + 1)
+        totalDepth = leftDepth + depth
+        return totalDepth
+    elif root.right is not None:
+        rightDepth = subtreeDepth(root.right, depth + 1)
+        totalDepth = rightDepth + depth
+        return totalDepth
+    else:
+        totalDepth = depth
+        return totalDepth
+
+    # 3. Write code.
+    # 4. Test code.
+    # 5. Optimize code (runtime analysis) = O(n)
