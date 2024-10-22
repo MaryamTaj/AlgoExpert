@@ -1,0 +1,41 @@
+import math
+# This is an input class. Do not edit.
+class LinkedList:
+    def __init__(self, value):
+        self.value = value
+        self.next = None
+
+
+def middleNode(linkedList):
+    # Count the entire length of the linked list.
+    currentNode = linkedList
+    totalCount = 0
+    while currentNode is not None:
+        totalCount += 1
+        currentNode = currentNode.next
+    # Calculate the index of the middle node. 
+    # If it is an even length, middle node = (length / 2) + 1
+    # If it an odd length, middle node = ceil(length / 2)
+    if totalCount % 2 == 0:
+        middleCount = (totalCount / 2) + 1
+        # Reset the counter. Traverse the linked list until you reach the 
+        # middle node. 
+        count = 0
+        currentNode = linkedList
+        while count != middleCount:
+            middleNode = currentNode
+            count += 1
+            currentNode = currentNode.next
+        return middleNode
+    else:
+        middleCount = math.ceil(totalCount / 2)
+        # Reset the counter. Traverse the linked list until you reach the 
+        # middle node. 
+        count = 0
+        currentNode = linkedList
+        while count != middleCount:
+            middleNode = currentNode
+            count += 1
+            currentNode = currentNode.next
+        return middleNode
+
