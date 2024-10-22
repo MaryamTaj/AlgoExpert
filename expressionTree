@@ -1,0 +1,41 @@
+# This is an input class. Do not edit.
+class BinaryTree:
+    def __init__(self, value, left=None, right=None):
+        self.value = value
+        self.left = left
+        self.right = right
+
+
+def evaluateExpressionTree(tree):
+    # 1. Clarify assumptions
+    # leaf nodes = positive integers
+    # non-leaf nodes = operators
+    # What do you return for an empty tree? 
+    # 2. Identify initial solution. Write pseudocode.
+    # If the root is -1, return right subtree + left subtree
+    if tree.value == -1:
+        right = evaluateExpressionTree(tree.right)
+        left = evaluateExpressionTree(tree.left)
+        return right + left
+    # If the root is -2, return right subtree - left subtree
+    elif tree.value == -2:
+        right = evaluateExpressionTree(tree.right)
+        left = evaluateExpressionTree(tree.left)
+        return left - right
+    # If the root is -3, return left subtree / right subtree
+    elif tree.value == -3:
+        right = evaluateExpressionTree(tree.right)
+        left = evaluateExpressionTree(tree.left)
+        return int(left / right)
+    # If the root is -4, return left subtree * right subtree
+    elif tree.value == -4:
+        right = evaluateExpressionTree(tree.right)
+        left = evaluateExpressionTree(tree.left)
+        return left * right
+    # If the root is a positive integer, return the root
+    else:
+        return tree.value
+    # 3. Write code.
+    # 4. Test code.
+    # 5. Optimize code (runtime analysis) = O(n)
+
