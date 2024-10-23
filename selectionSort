@@ -1,0 +1,16 @@
+def selectionSort(array):
+    for i in range(0, len(array)):
+        # Find the index of the minimum element in the unsorted partition [i:]
+        minIndex = findSmallestIndex(array, i)
+        # Swap the smallest element in the unsorted partition with array[i]
+        array[i], array[minIndex] = array[minIndex], array[i]
+    return array
+
+def findSmallestIndex(array, i):
+    min = float('inf')
+    minIndex = 0
+    for j in range(i, len(array)):
+        if array[j] < min:
+            min = array[j]
+            minIndex = j
+    return minIndex
