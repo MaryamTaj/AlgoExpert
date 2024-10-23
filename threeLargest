@@ -1,0 +1,32 @@
+def findThreeLargestNumbers(array):
+    # 1. Clarify assumptions.
+    # 2. Identify initial solution. Write pseudocode.
+    # Initialize firstMax = -inf.
+    firstMax = float('-inf')
+    firstMaxIndex = 0
+    # Find the highest maximum integer.
+    for i in range(0, len(array)):
+        if array[i] > firstMax:
+            firstMax = array[i]
+            firstMaxIndex = i
+
+    # Initialize secondMax = -inf.
+    secondMax = float('-inf')
+    secondMaxIndex = 0
+    # Find the second highest maximum integer that is <= firstMax.
+    for i in range(0, len(array)):
+        if array[i] > secondMax and array[i] <= firstMax and i != firstMaxIndex:
+            secondMax = array[i]
+            secondMaxIndex = i
+
+    # Initialize thirdMax = -inf.  
+    thirdMax = float('-inf')
+    # Find the third highest maximum integer that is <= secondMax.
+    for i in range(0, len(array)):
+        if array[i] > thirdMax and array[i] <= secondMax and i != secondMaxIndex:
+            thirdMax = array[i]
+
+    return [thirdMax, secondMax, firstMax]
+    # 3. Write code.
+    # 4. Test code.
+    # 5. Optimize code (runtime analysis) = O(n)
