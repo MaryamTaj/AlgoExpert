@@ -1,3 +1,4 @@
+
 def longestPalindromicSubstring(string):
     # 1. Clarify assumptions.
     # What do I return if input = ""? Return ""
