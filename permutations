@@ -1,0 +1,28 @@
+def getPermutations(array):
+    permutations = []
+    possibleValues = array.copy()
+    if array == []: return []
+    if len(array) == 1: return [array]
+    for i in range(0, len(array)):
+        # Start a permutation with a random value in the array.
+        value = array[i]
+        # Remove the value from a copy of the array. You cannot choose it 
+        # again in the permutation.
+        possibleValues.remove(value)
+        print(f"possibleValues: {possibleValues}")
+        # Add the rest of the permutation.
+        remainingPermutations = getPermutations(possibleValues)
+        print(f"remainingPermutations: {remainingPermutations}")
+        for permutation in remainingPermutations:
+            permutations.append([value] + permutation)
+
+        # Add the value back to the copy of the array, since you will be
+        # starting the permutation with another value. Thus, you can
+        # include this value in the smaller permutation.
+        possibleValues.append(value)
+    return permutations
+            
+            
+            
+        
+            
