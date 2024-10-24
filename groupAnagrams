@@ -1,0 +1,54 @@
+def groupAnagrams(words):
+    # 1. Clarify assumptions
+    # Can I receive an empty input array? Yes.
+    # What do I return if there are no anagrams? []
+    # 2. Identify initial solution. Write pseudocode.
+    # Approach #1:
+    anagrams = []
+    # Iterate through all the words in the words array.
+    for baseWord in words:
+        anagram = set()
+        # Find all the letters in a word.
+        baseLetters = getLetters(baseWord)
+        anagram.add(baseWord)
+        for comparedWord in words:
+            if baseWord != comparedWord:
+                comparedLetters = getLetters(comparedWord)
+                # If a different word has the same letters, add it to the anagram
+                # set.
+                if sorted(baseLetters) == sorted(comparedLetters):
+                    anagram.add(comparedWord)
+        # Append the group of anagrams to the anagrams array.
+        if anagram not in anagrams:
+            anagrams.append(anagram)
+    return anagrams
+
+    # Approach #2:
+    # Create a dictionary with keys = sorted word, and values = all the 
+    # words that when sorted, would match the key.
+    anagrams = {}
+    for word in words:
+        # Sort the word. "cba" -> "abc"
+        sortedWord = "".join(sorted(word))
+        # If the sortedWord is already in the anagram dictionary, add the word
+        # as a value.
+        if sortedWord in anagrams:
+            anagrams[sortedWord].append(word)
+        else:
+            anagrams[sortedWord] = [word]
+
+    # Convert the anagram dictionary to an array.
+    return list(anagram.values())
+        
+    # 3. Write code.
+    # 4. Test code.
+    # 5. Optimize code (runtime analysis) = O(w * n * log n), where w = 
+    # # of words = loop iterations and n = length of longest word = # of steps
+    # for sorting a word of n length.
+    
+
+def getLetters(word):
+    letters = []
+    for letter in word:
+        letters.append(letter)
+    return letters
