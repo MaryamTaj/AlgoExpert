@@ -1,0 +1,33 @@
+def longestPalindromicSubstring(string):
+    # 1. Clarify assumptions.
+    # What do I return if input = ""? Return ""
+    # What do I return if input does not have a palindrome? This is not possible.
+    # 2. Identify initial solution. Write pseudocode.
+    # Generate all possible substrings of the input string.
+    maxPalindrome = None
+    length = float('-inf')
+    for i in range(0, len(string)):
+        for j in range(i, len(string)):
+            substring = string[i:j + 1]
+            # Check if they are a palindrome. If they are, compare their length.
+            isPalindrome = palindromeCheck(substring)
+            if isPalindrome and len(substring) > length:
+                length = len(substring)
+                maxPalindrome = substring
+    # Return the palindrom substring with the largest length.
+    return maxPalindrome
+    # 3. Write code.
+    # 4. Test code.
+    # 5. Optimize code (runtime analysis) = O(n^3)
+
+def palindromeCheck(string):
+    left = 0
+    right = len(string) - 1
+    while string[left] == string[right] and left < right:
+        left += 1
+        right -=1
+
+    if string[left] != string[right]:
+        return False
+    else:
+        return True
