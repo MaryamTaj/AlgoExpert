@@ -1,3 +1,4 @@
+
 def groupAnagrams(words):
     # 1. Clarify assumptions
     # Can I receive an empty input array? Yes.
