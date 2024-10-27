@@ -1,0 +1,67 @@
+# This is an input class. Do not edit.
+class BinaryTree:
+    def __init__(self, value, left=None, right=None, parent=None):
+        self.value = value
+        self.left = left
+        self.right = right
+        self.parent = parent
+
+
+def findSuccessor(tree, node):
+    # 1. Clarify assumptions
+    # Do I return a node? Do I return a value? You must return the value
+    # 2. Identify initial solution (write pseudocode)
+    # If node has no parent (it is the root node), the successor is 
+    # the leftmost node on the right subtree
+    if node.parent is None:
+        newNode = node.right
+        # There is no right subtree.
+        if newNode is None:
+            return None
+        else:
+            while newNode.left is not None:
+                newNode = newNode.left
+            return newNode
+    # If the node has a parent,
+    else:
+    # If the node.parent.right == node (i.e., the node is in a right subtree)
+        if node.parent.right == node:
+        # There is no right subtree
+            # Case 1: The node is in the root's left subtree
+            if node.right is None: 
+                newNode = node
+                while newNode.parent is not None:
+                    newNode = newNode.parent
+                
+                rootNode = newNode
+                
+            # Case 2: The node is the root's right subtree
+                while newNode.right is not None:
+                    newNode = newNode.right
+                    if newNode == node:
+                        return None
+                return rootNode
+            else: 
+                newNode = node.right
+                while newNode.left is not None:
+                    newNode = newNode.left
+                return newNode
+    # If the node.parent.left == node (i.e., the node is in a left subtree)
+        if node.parent.left == node:
+            # Return the leftmost node in the right subtree
+            # There is no right subtree
+            if node.right is None:
+                return node.parent
+            else:
+                newNode = node.right
+                while newNode.left is not None:
+                    newNode = newNode.left
+                return newNode
+    # 3. Write code
+    # 4. Test code
+    # 5. Optimize code (time + space analysis)
+    # Time = O(log n)
+    # Space = O(1). You only need to know the parent/right/left per current node 
+    # = you need to store a constant amount of information.
+
+    
