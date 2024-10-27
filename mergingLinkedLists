@@ -1,0 +1,28 @@
+# This is an input class. Do not edit.
+class LinkedList:
+    def __init__(self, value):
+        self.value = value
+        self.next = None
+
+
+def mergingLinkedLists(linkedListOne, linkedListTwo):
+    listOneNodes = []
+    currentNodeOne = linkedListOne
+    while currentNodeOne is not None:
+        listOneNodes.append(currentNodeOne)
+        currentNodeOne = currentNodeOne.next
+
+    currentNodeTwo = linkedListTwo
+    while currentNodeTwo is not None:
+        if currentNodeTwo in listOneNodes:
+            return currentNodeTwo
+        currentNodeTwo = currentNodeTwo.next
+
+    return None
+
+
+# Analysis:
+# Time: O(n + m), n = length of linkedListOne, m = length of linkedListTwo
+# -> Suppose the linkedLists do not merge at all. 
+# Space: O(n), n = length of linkedListOne = you have to store all the nodes
+# in linkedListOne in an array.
