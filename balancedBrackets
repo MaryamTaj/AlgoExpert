@@ -1,0 +1,38 @@
+def balancedBrackets(string):
+    # 1. Clarify assumptions.
+    # Can the input string contain characters other than brackets? Yes.
+    # 2. Identify initial solution (write pseudocode)
+    stack = []
+    openingBrackets = "([{"
+    closingBrackets = ")]}"
+    matchingBrackets = {")": "(", "]": "[", "}": "{"}
+    # Iterate through the string. 
+    for char in string:
+        print(char)
+        print(stack)
+    # As you encounter an opening bracket, add it to the stack.
+        if char in openingBrackets:
+            stack.append(char)
+    # If you encounter a closing bracket,
+        elif char in closingBrackets:
+            # and the stack is empty (i.e., the string starts with a closing
+            # bracket), return False
+            if len(stack) == 0:
+                return False
+            # and the last element in the stack was a corresponding 
+            # opening bracket, pop off the stack.
+            if stack[-1] == matchingBrackets[char]:
+                stack.pop()
+            # and the last element in the stack was not a corresponding
+            # opening bracket, return False
+            else:
+                return False
+    # If the stack is empty, return True
+    # Otherwise, return False
+    return len(stack) == 0
+   
+    # 3. Write code
+    # 4. Test code
+    # 5. Optimize code (time + space analysis)
+    # Time = O(n)
+    # Space = O(n). Suppose you are storing a string with only opening brackets.
