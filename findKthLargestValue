@@ -1,0 +1,20 @@
+# This is an input class. Do not edit.
+class BST:
+    def __init__(self, value, left=None, right=None):
+        self.value = value
+        self.left = left
+        self.right = right
+
+
+def findKthLargestValueInBst(tree, k):
+    orderedValues = inOrderTraversal(tree)
+    print(orderedValues)
+    return orderedValues[len(orderedValues) - k]
+
+def inOrderTraversal(tree):
+    if tree is None: 
+        return []
+    else:
+        left = inOrderTraversal(tree.left)
+        right = inOrderTraversal(tree.right)
+        return left + [tree.value] + right
