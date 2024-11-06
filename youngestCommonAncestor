@@ -1,0 +1,43 @@
+# This is an input class. Do not edit.
+class AncestralTree:
+    def __init__(self, name):
+        self.name = name
+        self.ancestor = None
+
+
+def getYoungestCommonAncestor(topAncestor, descendantOne, descendantTwo):
+    # 1. Clarify assumptions
+    # What happens if you have A - B - C? descendantOne = B, and descendantTwo = C
+    # You return B
+    # This captures the case where descendantOne is an ancestor of descendantTwo 
+    # (or vice versa); Return descendantOne
+    # 2. Identify initial solution (write pseudocode)
+    # We will use DFS, since we need to traverse up not out.
+    # For each descendant, store all the visited ancestors in an array.
+    ancestorsOne = DFS(descendantOne)
+    ancestorsTwo = DFS(descendantTwo)
+    # Return the first ancestor in common
+    for ancestor1 in ancestorsOne:
+        for ancestor2 in ancestorsTwo:
+            if ancestor1 == ancestor2:
+                return ancestor1
+    # 3. Write code
+    # 4. Test code
+    # 5. Optimize code (runtime analysis)
+
+def DFS(descendant):
+    ancestors = []
+    
+    currentNode = descendant
+    ancestors.append(currentNode)
+
+    while currentNode.ancestor != None:
+        ancestor = currentNode.ancestor
+        ancestors.append(ancestor)
+        currentNode = ancestor
+
+    return ancestors
+
+# Analysis:
+# Space: O(n), where n represents the total number of nodes in the graph
+# Runtime: O(n^2), where n represents the total number of nodes in the graph
