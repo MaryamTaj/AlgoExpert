@@ -1,0 +1,44 @@
+def cycleInGraph(edges):
+    # Write your code here.
+  
+    # 1. Clarify assumptions
+    # Is 0 -> 1 -> 2 -> 0 a different cycle from 1 -> 2 -> 0 ->  1? Yes.
+    # 2. Identify initial solution (write pseudocode)
+    numberOfVertices = len(edges)
+    visited = [0 for _ in range(numberOfVertices)]
+    inPath = [0 for _ in range(numberOfVertices)]
+    
+    for i in range(numberOfVertices):
+        if visited[i] == 1:
+            continue
+
+        containsCycle = detectCycle(i, edges, visited, inPath)
+        if containsCycle:
+            return True
+
+    return False
+       
+    
+   
+
+def detectCycle(i, edges, visited, inPath):
+    visited[i] = 1
+    inPath[i] = 1
+
+    
+    neighbors = edges[i]
+    for neighbor in neighbors:
+        if visited[neighbor] == 0:
+            cycle = detectCycle(neighbor, edges, visited, inPath)
+            if cycle:
+                return True
+        elif inPath[neighbor] == 1:
+            return True
+            
+    
+    inPath[i] = 0       
+    return False     
+        
+    # 3. Write code
+    # 4. Test code
+    # 5. Optimize code
