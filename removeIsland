@@ -1,0 +1,107 @@
+# def removeIslands(matrix):
+#     # 1. Clarify assumptions
+#     # 2. Identify an initial solution (write pseudocode)
+#     # Initialize visited array. 
+#     visited = [[False for value in row] for row in matrix]
+    
+#     # Use BFS
+#     for i in range(0, len(matrix)):
+#         for j in range(0, len(matrix[0])):
+#             BFS(i, j, matrix, visited)
+    
+#     return matrix
+
+# def BFS(i, j, matrix, visited):
+#     # Initialize island = True
+#     island = True
+
+#     # Initialize adjacent = []
+#     adjacent = []
+    
+#     # Each (i,j) is a node. 
+#     # Add the node to a queue. 
+#     queue = [(i, j)]
+#     # Check the node's neighbors.
+#     while queue != []:
+#         node = queue.pop(0)
+#         i = node[0]
+#         j = node[1]
+
+#         visited[i][j] = True
+#         adjacent.append((i,j))
+        
+#     # If the neighbor is an outside node, it is no longer an island
+#         if i == 0 or i == len(matrix) - 1 or j == 0 or j == len(matrix[0]) - 1:
+#             island = False
+
+#         validNeighbors = getValidNeighbors(i, j, matrix, visited)
+#         for neighbor in validNeighbors:
+#             queue.append(neighbor)
+
+#     # If island = True, go through the coordinates in adjacent1 and change them to 0
+#     if island:
+#         for node in adjacent:
+#             i = node[0]
+#             j = node[1]
+#             matrix[i][j] = 0
+
+# def getValidNeighbors(i, j, matrix, visited):
+#     unvisitedNeighbors = []
+
+#     # The node is not in the top row. Add the node above it.
+#     if i > 0 and visited[i - 1][j] == False and matrix[i - 1][j] == 1:
+#         unvisitedNeighbors.append((i - 1, j))
+    
+#     # The node is not in the bottom row. Add the node below it.
+#     if i < len(matrix) - 1 and visited[i + 1][j] == False and matrix[i + 1][j] == 1:
+#         unvisitedNeighbors.append((i + 1, j))
+#     # The node is not in the leftmost row. Add the node to the left.
+#     if j > 0 and visited[i][j - 1] == False and matrix[i][j - 1] == 1:
+#         unvisitedNeighbors.append((i, j - 1))
+#     # The node is not in the rightmost row. Add the node to the right.
+#     if j < len(matrix[0]) - 1 and visited[i][j + 1] == False and matrix[i][j + 1] == 1:
+#         unvisitedNeighbors.append((i, j + 1))   
+
+#     return unvisitedNeighbors
+
+def removeIslands(matrix):
+    visited = [[False for _ in row] for row in matrix]
+    
+    # Traverse only the border cells and run BFS for all 1's found on borders
+    for i in range(len(matrix)):
+        for j in range(len(matrix[0])):
+            if (i == 0 or i == len(matrix) - 1 or j == 0 or j == len(matrix[0]) - 1) and matrix[i][j] == 1:
+                BFS(i, j, matrix, visited)
+    
+    # Turn all unvisited 1's to 0 as they are islands
+    for i in range(1, len(matrix) - 1):
+        for j in range(1, len(matrix[0]) - 1):
+            if matrix[i][j] == 1 and not visited[i][j]:
+                matrix[i][j] = 0
+    
+    return matrix
+
+def BFS(i, j, matrix, visited):
+    queue = [(i, j)]
+    while queue:
+        i, j = queue.pop(0)
+        if visited[i][j]:
+            continue
+        visited[i][j] = True
+        
+        for ni, nj in getValidNeighbors(i, j, matrix, visited):
+            queue.append((ni, nj))
+
+def getValidNeighbors(i, j, matrix, visited):
+    unvisitedNeighbors = []
+    
+    if i > 0 and not visited[i - 1][j] and matrix[i - 1][j] == 1:
+        unvisitedNeighbors.append((i - 1, j))
+    if i < len(matrix) - 1 and not visited[i + 1][j] and matrix[i + 1][j] == 1:
+        unvisitedNeighbors.append((i + 1, j))
+    if j > 0 and not visited[i][j - 1] and matrix[i][j - 1] == 1:
+        unvisitedNeighbors.append((i, j - 1))
+    if j < len(matrix[0]) - 1 and not visited[i][j + 1] and matrix[i][j + 1] == 1:
+        unvisitedNeighbors.append((i, j + 1))
+    
+    return unvisitedNeighbors
