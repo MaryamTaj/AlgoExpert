@@ -1,0 +1,73 @@
+def minimumPassesOfMatrix(matrix):
+    # 1. Clarify assumptions
+    # What do you return if you receive an empty matrix? You will never receive an empty matrix.
+    # Can you receive a matrix which has no minimum passes that will convert all negative integers
+    # to positive integers? Yes. In that case, return -1.
+    # 2. Identify initial solution (Write pseudocode)
+    # Initialize the number of passes.
+    passes = 0
+    # Initialize queue1 = positive values for current pass.
+    currentQueue = []
+    # Initialize queue2 = positive values for next pass.
+    nextQueue = []
+    # Iterate through the entire matrix. If you encounter a positive value, append it to 
+    # queue1.
+    for i in range(0, len(matrix)):
+        for j in range(0, len(matrix[0])):
+            if matrix[i][j] > 0:
+                currentQueue.append((i, j))
+                
+    # While queue1 is not empty, use a helper function that converts it's negative 
+    # neighbors and appends them to queue2.
+    while currentQueue != []:
+        positiveNode = currentQueue.pop(0)
+        i = positiveNode[0]
+        j = positiveNode[1]
+        convert(matrix, i, j, nextQueue)
+    # Once queue1 is empty, increment passes by 1. Change the current queue = queue2, and 
+    # next queue = queue1
+        if currentQueue == []:
+            passes += 1
+            currentQueue = nextQueue
+            nextQueue = []
+
+    for i in range(0, len(matrix)):
+        for j in range(0, len(matrix[0])):
+            # If there are any negative integers left, return -1
+            if matrix[i][j] < 0:
+                return -1
+
+    # Else, return the number of passes
+    return passes - 1
+    
+    # 3. Write code
+    # 4. Optimize code
+   
+
+def convert(matrix, i, j, nextQueue):
+    neighbors = getValidNeighbors(matrix, i, j)
+    for neighbor in neighbors:
+        n_i = neighbor[0]
+        n_j = neighbor[1]
+        matrix[n_i][n_j] = matrix[n_i][n_j] * -1
+        nextQueue.append(neighbor)
+
+
+def getValidNeighbors(matrix, i, j):
+    unvisitedNeighbors = []
+    
+    if i > 0 and matrix[i - 1][j] < 0:
+        unvisitedNeighbors.append((i - 1, j))
+        
+    if i < len(matrix) - 1 and matrix[i + 1][j] < 0:
+        unvisitedNeighbors.append((i + 1, j))
+    
+    if j > 0 and matrix[i][j - 1] < 0:
+        unvisitedNeighbors.append((i, j - 1))
+        
+    if j < len(matrix[0]) - 1 and matrix[i][j + 1] < 0:
+        unvisitedNeighbors.append((i, j + 1))
+
+    return unvisitedNeighbors
+    
+
