@@ -1,0 +1,36 @@
+def sunsetViews(buildings, direction):
+    # 1. Clarify assumptions
+    # 2. Identify initial solution (Write pseudocode)
+    stack = []
+    # Direction = East
+    if direction == "EAST":
+    # Iterate through each value in the array. If the values after are less than the
+    # value, the building can see the sunset.
+        for i in range(0, len(buildings)):
+            building = buildings[i]
+            stack.append(i)
+            for j in range(i + 1, len(buildings)):
+                nextBuilding = buildings[j]
+                if building <= nextBuilding:
+                    stack.pop()
+                    break
+        
+                
+    # Direction = West
+    if direction == "WEST":
+    # Iterate through each value in the array. If the values before are less than the
+    # value, the building can see the sunset.
+        for i in range(len(buildings) - 1, -1, -1):
+            building = buildings[i]
+            stack.append(i)
+            for j in range(i - 1, -1, -1):
+                nextBuilding = buildings[j]
+                if building <= nextBuilding:
+                    stack.pop()
+                    break
+
+    # Sort the array in ascending order.
+    stack.sort()
+    return stack
+    # 3. Write code
+    # 4. Optimize code
