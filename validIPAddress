@@ -1,0 +1,63 @@
+def validIPAddresses(string):
+    # Write your code here.
+    # 1. Clarify assumptions (i.e., edge cases)
+    # Input = empty string => Return []
+    # Do I need to return the IP addresses in a specific order? No.
+    # The IP address contains 3 periods.
+    # Each individual integer is within 0 - 255.
+    # Each individual integer cannot have leading 0s.
+    # We need to have at least 4 parts.
+    
+    # 2. Identify initial solution (write pseudocode)
+    # Initialize ipAddresses array.
+    ipAddressesFound = []
+    # Place the first period. It can be placed after the first integer, the second integer
+    # or the third integer. It cannot be placed after the fourth integer, since the resulting
+    # integer > 255.
+    # Note: The min() prevents index errors: 
+    # 0, index 1, index 2 , index 3
+    # In the condition where we choose len(string), that means:
+    # A. len(string) = 1 => We do not want to iterate through a larger index than possible.
+    # B. len(string) = 2, 3 => We do not want to iterate through a larger index than possible.
+    # C. len(string) = 4 
+    for i in range(1, min(len(string), 4)):
+        currentIPAddressParts = ['', '', '', '']
+        currentIPAddressParts[0] = string[:i]
+        # If the first period placement => invalid part => advance the first period
+        if not isValidPart(currentIPAddressParts[0]):
+            continue
+
+        # Place the second period. 
+        for j in range(i + 1, min(len(string), i + 4)):
+            currentIPAddressParts[1] = string[i : j]
+            if not isValidPart(currentIPAddressParts[1]):
+                continue
+
+            # Place the third period.
+            for k in range(j + 1, min(len(string), j + 4)):
+                currentIPAddressParts[2] = string[j : k]
+                currentIPAddressParts[3] = string[k: ]
+                if isValidPart(currentIPAddressParts[2]) and isValidPart(currentIPAddressParts[3]):
+                    # Concatenate and append ipAddress to ipAddressesFound
+                    ipAddressesFound.append('.'.join(currentIPAddressParts))
+                    
+    return ipAddressesFound
+                    
+                
+                
+
+def isValidPart(string):
+    stringAsInt = int(string)
+    
+    # It is not a valid part if it is greater than 255.
+    if stringAsInt > 255:
+        return False
+
+    # It is not a valid part if it has leading zeroes.
+    return len(string) == len(str(stringAsInt))
+    
+    # 3. Test code
+    # 4. Optimize code (analysis)
+    # Time = O(1), since you can take at most 3 * 3 * 3 steps.
+    # Space = O(1), since you can store at most 256 * 256 * 256 * 256 ip addresses.
+    
