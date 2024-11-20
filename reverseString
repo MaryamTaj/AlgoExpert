@@ -1,0 +1,41 @@
+def reverseWordsInString(string):
+    # 1. Clarify assumptions (edge cases)
+    # What do I return if string == ""? Return ""
+    # What do I return if there are more than one whitespaces between the words? 
+    # string == "whitespaces    4"
+    # Return "4    whitespaces"
+    # 2. Identify initial solution
+    reversedStringArray = []
+    word = ""
+    # Iterate through the string starting from the end. 
+    for i in range(0, len(string)):
+    # If you encounter a non-whitespace character, add it to the variable word.
+        
+        if string[i] != " ":
+            word += string[i]
+            # Case: You are the last word in the string, and are not succeeded by a whitespace
+            if i == len(string) - 1:
+                reversedStringArray.append(word)
+        
+    # If you encounter a whitespace, add the whitespace to the variable whitespace.
+        else:
+            # Store the word prior to the whitespace in the array.
+            reversedStringArray.append(word)
+            reversedStringArray.append(" ")
+            # Reset the word
+            word = ""
+
+    print(reversedStringArray)
+    # Reverse the array, and return it.
+    reversedString = ""
+    for i in range(len(reversedStringArray) - 1, -1, -1):
+        reversedString += reversedStringArray[i]
+
+    print(reversedString)
+    return reversedString
+
+    # 3. Write code
+    # 4. Test code
+    # 5. Optimize code
+    # Runtime = O(n), where n is the length of the string.
+    # Space = O(n), where n is the length of the string.
