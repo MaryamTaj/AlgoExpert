@@ -1,0 +1,52 @@
+def minimumCharactersForWords(words):
+    # Write your code here.
+    # 1. Clarify the assumptions (i.e., edge cases)
+    # Ex. input = ["this", "that", "did", "deed", "them!", "a"]. output = [t, t, h, i, s, a, d,d, e,e m, !]
+    
+    # 2. Identify an initial solution
+    # An outer dictionary that stores each character needed to form all of the words, and their 
+    # frequency.
+    # Ex. {t: 2, h: 1}
+    outerDict = {}
+    # Iterate through each word
+    for word in words:
+        # An inner dictionary which stores each character in the word, and its frequency.
+        innerDict = {}
+        # Iterate through each character in the word.
+        for char in word:
+        # If a character in the word is in the inner dictionary, increase the value(i.e., frequency) 
+        # by 1.
+            if char in innerDict:
+                innerDict[char] += 1
+        # If a character in the word is not in the inner dictionary, add it.
+            if char not in innerDict:
+                innerDict[char] = 1
+        
+        # If a character in the word is not in the outer dictionary, add it. 
+            if char not in outerDict:
+                outerDict[char] = 1
+        
+        # If a character in the word is in the outer dictionary, and it's frequency in the outer
+        # dictionary = it's frequency in the inner dictionary, do nothing.
+        # If a character in the word is in the outer dictionary, and it's frequency in the outer
+        # dictionary < it's frequency in the inner dictionary, increase the value in the outer dictionary.
+            if outerDict[char] < innerDict[char]:
+                outerDict[char] += 1
+
+    # Initialize empty string. 
+    string = ""
+    # Iterate through the dictionary. Multiple the frequency by the character. Append the result
+    # to the string.
+    for char in outerDict:
+        result = char * outerDict[char]
+        string += result
+        
+    # Convert the string to an array, and return.
+    return list(string)
+    
+    # 3. Write code
+    # 4. Test code
+    # 5. Analyze and optimize code
+    # Time = O(n * l), where n is the number of words, and l is the average number of
+    # characters in a word. 
+    # Space = O(c), where c is the number of unique characters across all words.
