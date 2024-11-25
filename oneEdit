@@ -1,0 +1,99 @@
+def oneEdit(stringOne, stringTwo):
+    # Write your code here.
+    # 1. Clarify assumptions (i.e., edge cases)
+    # What happens if stringOne == stringTwo? Return true
+    # 2. Identify initial solution
+    # Approach #1:
+    # if len(stringOne) == len(stringTwo):
+    # # Case: Replace
+    # # Iterate through stringOne. 
+    #     for i in range(len(stringOne)):
+    #         # Compare each character in stringOne with stringTwo. 
+    #         # If there is a different character in stringOne than in stringTwo, replace it. 
+    #         if stringOne[i] != stringTwo[i]:
+    #             stringOne = stringOne[:i] + stringTwo[i] + stringOne[i + 1:]
+    #     # If stringOne != stringTwo, return False
+    #     if stringOne != stringTwo:
+    #         return False
+        
+    #     return True
+
+    # # Case: Add
+    # # i: len(stringOne) + 1 = len(stringTwo) => stringOne is shorter than stringTwo.
+    # elif len(stringOne) + 1 == len(stringTwo):
+    # # Iterate through stringOne.
+    #     for i in range(len(stringOne)):
+    # # Compare each character in stringOne with stringTwo.
+    # # If there is a different character, add stringTwo character to the index in stringOne.
+    #         if stringOne[i] != stringTwo[i]:
+    #             stringOne = stringOne[:i] + stringTwo[i] + stringOne[i + 1:]
+    #             # If stringOne != stringTwo, return False
+    #             if stringOne != stringTwo:
+    #                 return False
+    #     return True
+
+    # # i: len(stringTwo) + 1 = len(stringOne) => stringTwo is shorter than stringOne.
+    # elif len(stringTwo) + 1 == len(stringOne):
+    # # Iterate through stringOne.
+    #     for i in range(len(stringTwo)):
+    # # Compare each character in stringTwo with stringOne.
+    # # If there is a different character, add stringOne character to the index in stringTwo.
+    #         if stringOne[i] != stringTwo[i]:
+    #             tempString1 = stringTwo[:i] + stringOne[i] + stringTwo[i + 1:]
+    #             # Case: stringOne: ab, stringTwo = b
+    #             tempString2 = stringTwo[:i] + stringOne[i] + stringTwo[i:]
+    #             print(f"tempString1: {tempString1}")
+    #             print(f"tempString2: {tempString2}")
+    #             # If stringOne != stringTwo, return False
+    #             if tempString1 == stringOne:
+    #                 return True
+    #             if tempString2 == stringOne:
+    #                 return True
+    #             else:
+    #                 return False
+    #     return True
+        
+    # else:
+    #     return False
+
+    # Approach #2:
+    lengthOne, lengthTwo = len(stringOne), len(stringTwo)
+    if abs(lengthOne - lengthTwo) > 1:
+        return False
+
+    madeEdit = False
+    idxOne = 0
+    idxTwo = 0
+
+    while idxOne < lengthOne and idxTwo < lengthTwo:
+        if stringOne[idxOne] != stringTwo[idxTwo]:
+            if madeEdit:
+                return False
+            
+            madeEdit = True
+            
+            # stringOne = "hello", stringTwo = "hllo"
+            if lengthOne > lengthTwo:
+                idxOne += 1
+            # stringOne = "hllo", stringTwo = "hello"
+            elif lengthTwo > lengthOne:
+                idxTwo += 1
+            else:
+                idxOne += 1
+                idxTwo += 1
+        
+        else:
+            idxOne += 1
+            idxTwo += 1
+            
+    return True
+
+    
+        
+
+    # 3. Write code
+    # 4. Test code
+    # 5. Analyze code 
+    # Time: O(n), where n is the length of the shorter string.
+    # Space: O(1).
+
