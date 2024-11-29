@@ -1,0 +1,50 @@
+def bestDigits(number, numDigits):
+    # Write your code here.
+    # 1. Clarify assumptions (consider edge cases)
+    # numDigits > len(number) or numDigits < 0: This will never happen 
+    # 2. Identify initial solution (write pseudocode)
+    # Approach #1:
+    # Find all the numbers possible by removing numDigits. 
+    # Return the largest number
+    # Approach #2:
+    # Initialize an empty stack
+    stack = []
+
+    
+    for i in range(len(number)):
+        # If the next digit > previous digit(s), pop off as many previous digits as possible
+        while numDigits > 0 and len(stack) > 0 and number[i] > stack[len(stack) - 1]:
+            numDigits -= 1
+            stack.pop()
+        
+        stack.append(number[i])
+        
+    # number is ordered from greatest to least, but numDigits > 0
+    # Ex. number = "321", numDigits = 1
+    while numDigits > 0:
+        numDigits -= 1
+        stack.pop()
+
+    # Join the stack to form a string
+    return "".join(stack)
+
+    # 3. Write code
+    # 4. Test code
+    # 5. Optimize code
+    # Time = O(n), where n = length(number)
+    # Let’s visualize the while loop:
+    # Input: number = "417325", numDigits = 2
+    # Iteration 1: Push 4. Stack: [4].
+    # Iteration 2: 1 < 4, so push 1. Stack: [4, 1].
+    # Iteration 3: 7 > 1 and 7 > 4. Pop twice (4, 1), then push 7. Stack: [7].
+    # Iteration 4: Push 3. Stack: [7, 3].
+    # Iteration 5: Push 2. Stack: [7, 3, 2].
+    # Iteration 6: Push 5. Stack: [7, 3, 2, 5].
+    # At most n pushes and n pops occurred. The while loop operated multiple times in 
+    # some iterations but did not exceed O(n) overall.
+    # The while loop has an amortized cost of O(1) per iteration of the for loop 
+    # because every pop corresponds to a prior push.
+
+
+    # Space = O(n), since in the worst-case, you can store number in stack (i.e., numDigits = 0)
+
