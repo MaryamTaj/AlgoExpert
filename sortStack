@@ -1,0 +1,42 @@
+def sortStack(stack):
+    # Write your code here.
+    # 1. Clarify assumptions (i.e., consider edge cases)
+    # 2. Identify initial solution (i.e., write pseudocode) 
+    # If the stack is empty, it is already sorted.
+    if stack == []:
+        return []
+    
+    else:    
+        # Pop an item from the top of the stack, and hold onto it in memory.    
+        value = stack.pop()
+        # Sort the rest of the stack. 
+        sortStack(stack)
+        # Insert the most recently popped off item into the now sorted stack, but in its proper sorted
+        # position
+        insertInPlace(stack, value)
+
+        return stack
+    # 3. Write code
+    # 4. Test code
+    # 5. Analyze code
+
+# Precondition: stack is sorted.
+def insertInPlace(stack, value):
+    # Base case: You have found the position to insert the value in. 
+    if len(stack) == 0 or stack[len(stack) - 1] <= value:
+        stack.append(value)
+        return
+
+    # Recursive case: You have not yet found the position to insert the value in.
+    # Pop off from the stack. Insert the value in the correct position, and add back
+    # the popped off value.
+    else: 
+        poppedVal = stack.pop()
+        insertInPlace(stack, value)
+        stack.append(poppedVal)
+
+# Analysis:
+# Time: O()
+# Space: O(n), where n is the length of the stack
+# Note: In a recursive case, the most amount of recursive calls = the amount of space it takes up
+    
