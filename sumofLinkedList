@@ -1,0 +1,57 @@
+# This is an input class. Do not edit.
+class LinkedList:
+    def __init__(self, value):
+        self.value = value
+        self.next = None
+
+
+def sumOfLinkedLists(linkedListOne, linkedListTwo):
+    # 1. Clarify assumptions (i.e., consider edge cases)
+    # 2. Identify initial solution (i.e., write pseudocode)
+    # Go through each linked list, multiplying each value by 10 * i (i.e., * 1, * 10, * 100...)
+    # Calculate the sum.
+    currOne = linkedListOne
+    sumOne = 0
+    multiplier = 0
+    
+    while currOne is not None:
+        sumSoFar = currOne.value * (10**multiplier)
+        sumOne += sumSoFar
+
+        multiplier += 1
+        currOne = currOne.next
+
+    currTwo = linkedListTwo
+    sumTwo = 0
+    multiplier = 0
+    
+    while currTwo is not None:
+        sumSoFar = currTwo.value * (10**multiplier)
+        sumTwo += sumSoFar
+
+        multiplier += 1
+        currTwo = currTwo.next
+    
+    # Add the sum. 
+    totalSum = sumOne + sumTwo
+    
+    # Convert the sum into a string.
+    stringSum = str(totalSum)
+
+    # Create a linked list from the reversed string.
+    sumLinkedList = LinkedList(int(stringSum[-1]))
+    currNode = sumLinkedList
+    for i in range(len(stringSum) - 2, -1, -1):
+        currNode.next = LinkedList(int(stringSum[i]))
+        currNode = currNode.next
+
+    # 3. Write code
+    # 4. Test code
+    # 5. Analyze code
+    # Write your code here.
+    return sumLinkedList
+
+    # Analysis
+    # Space = O(d), where d is the length of the sum of linkedListOne and linkedListTwo
+    # Time = O(d), where d is the length of the sum of linkedListOne and linkedListTwo
+    
