@@ -1,0 +1,54 @@
+def nextGreaterElement(array):
+    # 1. Clarify assumptions (i.e., consider edge cases)
+    # What happens if there is no greater element? -1
+    # 2. Identify initial solution 
+    # Initialize a new array.
+    # Approach #1:
+    # newArray = [0] * len(array)
+    
+    # # Iterate through the input array.
+    # maximum = float("-inf")
+    # maxIdx = None
+    # for i in range(len(array)):
+    #     if array[i] > maximum: 
+    #         maximum = array[i]
+    #         maxIdx = i
+        
+    # # Find the index i of the maximum value. array[i] = -1
+    # newArray[maxIdx] = -1
+
+    # # Iterate through the inputArray. i = current element
+    # for i in range(len(array)):
+    #     j = 0
+    #     # Use a while loop to find array[i]; while inputArray[j] <= inputArray[i]: j += 1
+    #     while array[j] <= array[i]:
+    #         j += 1
+    #         # If i == len(array) - 1, reset it to 0
+    #         if j == len(array) - 1:
+    #             j = 0
+        
+    #     newArray[i] = array[j]
+
+    # return newArray
+    # Approach #2:
+    # Initialize the output array with -1, as -1 is the default value when no greater element exists
+    newArray = [-1] * len(array)
+
+    for i in range(0, len(array)):
+        for j in range(i, i + len(array)):
+            if j >= len(array):
+                idx = j % len(array)
+                if array[idx] > array[i]:
+                    newArray[i] = array[idx]
+                    break
+            elif array[j] > array[i]:
+                newArray[i] = array[j]
+                break
+
+    return newArray
+
+    # 3. Write code
+    # 4. Test code
+    # 5. Analyze code
+    # Time: O(n^2), where n = length of the array
+    # Space: O(n), where n = length of the array
