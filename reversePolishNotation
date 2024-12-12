@@ -1,0 +1,39 @@
+def reversePolishNotation(tokens):
+    # Write your code here.
+    # Clarify assumptions (i.e., consider edge cases)
+    # Identify initial solution
+    # Initialize stack
+    stack = []
+    # operators = ["+", "-", "*", "/"]
+    operators = ["+", "-", "*", "/"]
+    # Iterate through the tokens. 
+    for token in tokens:
+    # If a token is not an operator, append it to the stack.
+        if token not in operators:
+            stack.append(int(token))
+            
+    # If a token is an operator, pop out the last two items at the top of the stack. Perform
+    # the operation on the last two items. Append the result to the top of the stack. 
+        else:
+            operandTwo = stack.pop()
+            operandOne = stack.pop()
+            if token == "+":
+                result = operandOne + operandTwo
+                stack.append(result)
+            elif token == "-":
+                result = operandOne - operandTwo
+                stack.append(result)
+            elif token == "*":
+                result = operandOne * operandTwo
+                stack.append(result)
+            else:
+                result = int(operandOne / operandTwo)
+                stack.append(result)
+
+    # Once you reach the end of tokens, pop out the top of the stack.
+    return stack.pop()
+    
+    # Test code
+    # Analyze code
+    # Time: O(n), where n is the number of tokens
+    # Space: O(n), where n is the number of tokens
