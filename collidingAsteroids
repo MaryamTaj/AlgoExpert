@@ -1,0 +1,31 @@
+def collidingAsteroids(asteroids):
+    # Clarify assumptions (i.e., consider edge cases)
+    # What happens when you receive an asteroid of size = 0? Impossible input.
+    # Can you collide multiple times? Yes.
+    # Identify initial solution
+    # Initialize a stack.
+    stack = []
+    # Iterate through asteroids.
+    for asteroid in asteroids:
+        while stack and asteroid < 0 < stack[-1]:
+            top = stack[-1]
+    
+            if abs(top) < abs(asteroid):
+                stack.pop()
+            elif abs(top) == abs(asteroid):
+                stack.pop()
+                break
+            else:
+                break
+            
+        else:
+            stack.append(asteroid)
+                
+    # Return stack
+    return stack
+    # Write code
+    # Test code
+    # Analyze code
+    # Time: O(n), where n is the length of asteroids
+    # Space: O(n), where n is the length of asteroids
+
