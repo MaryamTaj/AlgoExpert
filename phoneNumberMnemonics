@@ -1,0 +1,80 @@
+def phoneNumberMnemonics(phoneNumber):
+    # Mapping of digits to possible letters
+    digit_to_letters = {
+        "0": ["0"],
+        "1": ["1"],
+        "2": ["a", "b", "c"],
+        "3": ["d", "e", "f"],
+        "4": ["g", "h", "i"],
+        "5": ["j", "k", "l"],
+        "6": ["m", "n", "o"],
+        "7": ["p", "q", "r", "s"],
+        "8": ["t", "u", "v"],
+        "9": ["w", "x", "y", "z"],
+    }
+
+    # Base case: empty input returns an array with an empty string
+    # if len(phoneNumber) == 0:
+    #     return [""]
+    if len(phoneNumber) == 1:
+        if phoneNumber[0] == "0":
+            return ["0"]
+        elif phoneNumber[0] == "1":
+            return ["1"]
+        elif phoneNumber[0] == "2":
+            return ["a", "b", "c"]
+        elif phoneNumber[0] == "3":
+            return ["d", "e", "f"]
+        elif phoneNumber[0] == "4":
+            return ["g", "h", "i"]
+        elif phoneNumber[0] == "5":
+            return ["j", "k", "l"]
+        elif phoneNumber[0] == "6":
+            return ["m", "n", "o"]
+        elif phoneNumber[0] == "7":
+            return ["p", "q", "r", "s"]
+        elif phoneNumber[0] == "8":
+            return ["t", "u", "v"]
+        else:
+            return ["w", "x", "y", "z"]
+    
+    # Recursive case: process all but the last digit
+    smallerMnemonics = phoneNumberMnemonics(phoneNumber[:-1])
+    lastDigit = phoneNumber[-1]
+    if lastDigit[0] == "0":
+        characterMnemonics = ["0"]
+    elif lastDigit[0] == "1":
+        characterMnemonics = ["1"]
+    elif lastDigit[0] == "2":
+        characterMnemonics = ["a", "b", "c"]
+    elif lastDigit[0] == "3":
+        characterMnemonics = ["d", "e", "f"]
+    elif lastDigit[0] == "4":
+        characterMnemonics = ["g", "h", "i"]
+    elif lastDigit[0] == "5":
+        characterMnemonics = ["j", "k", "l"]
+    elif lastDigit[0] == "6":
+        characterMnemonics = ["m", "n", "o"]
+    elif lastDigit[0] == "7":
+        characterMnemonics = ["p", "q", "r", "s"]
+    elif lastDigit[0] == "8":
+        characterMnemonics = ["t", "u", "v"]
+    elif lastDigit[0] == "9":
+        characterMnemonics = ["w", "x", "y", "z"]
+
+    # Combine character mnemonics with letters for the last digit
+    mnemonics = []
+    for mnemonic in smallerMnemonics:
+        for characterMnemonic in characterMnemonics:
+            mnemonics.append(mnemonic + characterMnemonic)
+    
+    return mnemonics
+
+
+# Analyze code
+# Time: O(4^n), where n is the length of the phoneNumber
+# Space: O(4^n * n), where n is the length of the phoneNumber
+# There can be, at most, n recursive calls. 
+# In each recursive call, we store the array mnemonics.
+# Notice that since each digit in phoneNumber can have, at most, 4 associated letters, the 
+# length of mnemonics can be, at most, 4^n.
