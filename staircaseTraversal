@@ -1,0 +1,52 @@
+def staircaseTraversal(height, maxSteps):
+    # 1. Clarify assumptions (i.e., consider edge cases)
+    # height >= 0? Yes.
+    # maxSteps >= 0? Yes.
+    # maxSteps <= height? Yes.
+    # 0 <= maxSteps <= height.
+    # 2. Identify initial solution (i.e., write pseudocode)
+    # Recursive solution:
+    # Base case:
+    # if height == 0 or height == 1:
+    #     return 1
+    # Recursive case:
+    # Break down the problem.
+    # Let height = k.
+    # Let maxSteps = s.
+    # staircaseTraversal(k, s) = staircaseTraversal(k - 1, s) + staircaseTraversal (k - 2, s) + ...
+    # .... + staircaseTraversal(k - s, s).
+    # else:
+    #     numWaysSoFar = 0
+    #     for i in range(height - maxSteps, height):
+    #         if i >= 0:
+    #             numWaysSoFar += staircaseTraversal(i, maxSteps)
+                
+    #     return numWaysSoFar
+
+    # Time complexity: O(s^k), where s = # of maxSteps and k = height. This is because
+    # when you make a recursive call rec(k, s), the recursive tree will have a depth of n
+    # and a breadth of s.
+    # Space complexity: O(k), where k = height. This is because when you make a recursive
+    # call rec (k, s), the recursive call stack will store rec (k, s), rec (k - 1, s)....
+    # rec(1, s) = k elements, and then build its way up again. 
+
+    # Iterative solution (using dynamic programming):
+    # Initialize an array that will store the solutions to recursive calls.
+    solutions = [0] * (height + 1)
+    solutions[0] = 1
+    solutions[1] = 1
+
+    for i in range(2, len(solutions)):
+        numWaysSoFar = 0
+        for j in range(i - maxSteps, i):
+            numWaysSoFar += solutions[j]
+        solutions[i] = numWaysSoFar
+
+    return solutions[height]
+    
+    # Time complexity: O (k * s), where s = # of maxSteps and k = height.
+    # Space complexity: O (k), where k = height.
+    
+    # 3. Write code
+    # 4. Test code
+    # 5. Analyze code
