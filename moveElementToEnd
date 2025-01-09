@@ -1,0 +1,36 @@
+def moveElementToEnd(array, toMove):
+    # 1. Consider edge cases
+    # Will toMove be an integer in array? Yes.
+    # What happens when array == []? Return []
+    # 2. Identify initial solution
+    if array == []:
+        return array
+    # Initialize swapIndex that will swap with the value at the current index.
+    swapIndex = len(array) - 1
+
+    while array[swapIndex] == toMove and swapIndex > -1:
+        swapIndex -= 1
+
+    # The array only contains instances of toMove 
+    if swapIndex == -1:
+        return array
+    
+    # Iterate through the array.
+    for i in range(0, len(array)):
+    # If the element == toMove: 
+        if array[i] == toMove:
+            if swapIndex < i:
+                return array
+        # Swap the element at the current index with the element at the
+        # swapIndex.
+            print(f"swapIndex: {swapIndex}")
+            array[i], array[swapIndex] = array[swapIndex], array[i]
+            while array[swapIndex] == toMove and swapIndex > -1:
+                swapIndex -= 1
+            # print(f"swapIndex2: {swapIndex}")
+            print(f"array: {array}")
+            
+    return array
+    # 3. Write code
+    # 4. Test code
+    # 5. Analyze code
