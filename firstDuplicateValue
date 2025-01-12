@@ -1,0 +1,23 @@
+def firstDuplicateValue(array):
+    # Consider edge cases
+    # What happens when array == []? Return -1
+    # Identify an initial solution
+    dict = {}
+    # Iterate through the array
+    for i in range(0, len(array)):
+    # If the item is not in the dictionary, append it
+        if array[i] not in dict:
+            dict[array[i]] = 1
+            print(array[i])
+    # If the item is in the dictionary, return the item's index
+        else:
+            return array[i]
+
+    return -1
+    # Return -1
+    # Write code
+    # Test code
+    # Analyze code
+    # Time: O(n), where n = # of elements
+    # Space: O(n), where n = # of elements
+    
