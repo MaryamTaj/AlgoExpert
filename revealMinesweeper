@@ -1,0 +1,53 @@
+def revealMinesweeper(board, row, column):
+    # The item is a mine
+    if board[row][column] == "M":
+        board[row][column] = "X"
+        return board
+    
+    # The item is hidden
+    elif board[row][column] == "H":
+        numMines = count(board, row, column)  
+        # There is at least 1 adjacent mine
+        if numMines > 0:
+            board[row][column] = str(numMines)
+            return board
+       
+        # Recursive case: There are no adjacent mines
+        else:
+            board[row][column] = "0"
+            adjacentSquares = findAdjacent(board, row, column) # Returns adjacent squares in the form [(i, j)...]
+            for square in adjacentSquares:
+                revealMinesweeper(board, square[0], square[1])
+            return board
+        
+    # The item is a #
+    else:
+        return board
+
+# Returns # of adjacent mines
+def count(board, row, column):
+    count = 0
+    adjacentSquares = findAdjacent(board, row, column)
+    for square in adjacentSquares:
+        if board[square[0]][square[1]] == "M":
+            count += 1
+
+    return count
+
+# Returns an array of adjacent items in the format [(i, j)...]
+def findAdjacent(board, row, column):
+    adjacent = []
+    rows, cols = len(board) - 1, len(board[0]) - 1  # Dimensions of the board
+
+    # List of relative moves to find adjacent cells
+    moves = [(-1, -1), (-1, 0), (-1, 1),
+             (0, -1),          (0, 1),
+             (1, -1), (1, 0), (1, 1)]
+
+    for dr, dc in moves:
+        new_row, new_col = row + dr, column + dc
+        # Check if the new position is within bounds
+        if 0 <= new_row <= rows and 0 <= new_col <= cols:
+            adjacent.append((new_row, new_col))
+    
+    return adjacent
