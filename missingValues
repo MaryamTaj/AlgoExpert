@@ -1,0 +1,54 @@
+def missingNumbers(nums):
+    n = len(nums) + 2
+    # Sum up all the values from [1,........n]
+    sumN = 0
+    for i in range(1, len(nums) + 3):
+        sumN += i
+        
+    # Sum up all the values of nums.
+    sumNums = 0
+    for i in range(0, len(nums)):
+        sumNums += nums[i]
+        
+    # Find the difference - that is the total of the missing values.
+    totalDifference = sumN - sumNums
+
+    # Find the average of the two missing values. Missingvalue1 <= average. MissingValue > average.
+    average = totalDifference // 2
+    
+    # Iterate through nums. 
+    # lessthanAverage contains all the values that are less than the average.
+    # morethanAverage contains all the values that are greater than the average.
+    lessthanAverage = []
+    morethanAverage = []
+    for i in range(0, len(nums)):
+        if nums[i] <= average:
+            lessthanAverage.append(nums[i])
+        else:
+            morethanAverage.append(nums[i])
+            
+    # Sum up all the integer values from [1,......average]
+    sumSmaller = 0
+    for i in range(1, average + 1):
+        sumSmaller += i
+    # Calculate the sum of lessthanAverage.
+    sumLess = 0
+    for i in range(0, len(lessthanAverage)):
+        sumLess += lessthanAverage[i]
+    # Find the difference - that is missingValue1.
+    missingValue1 = sumSmaller - sumLess
+
+    # Sum up all the integer values from [average,......n]
+    sumLarger = 0
+    for i in range(average + 1, len(nums) + 3):
+        sumLarger += i
+    # Calculate the sum of lessthanAverage.
+    sumMore = 0
+    for i in range(0, len(morethanAverage)):
+        sumMore += morethanAverage[i]
+    # Find the difference - that is missingValue1.
+    missingValue2 = sumLarger - sumMore
+
+    return [missingValue1, missingValue2]
+    
+    
