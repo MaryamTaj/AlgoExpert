@@ -1,0 +1,41 @@
+def zeroSumSubarray(nums):
+    # Write your code here.
+    # Calculate the sum of the array at index [0, i].
+    # If a sum is repeated, it means that there is a zero sum. 
+    # Visualize the following:
+    #  0,........i,..........j
+    # [                       ]
+    # Suppose sum([0, i]) = x
+    # Now, suppose sum([0, j]) = x.
+    # That must mean sum([i, j]) = 0.
+
+    # Initialize an array that stores the sum of the array at index [0, i]
+    sums = [0 for _ in range(len(nums))]
+    sumSoFar = 0
+    for i in range(0, len(nums)):
+        # Calculate the sum from [0, i]
+        sumSoFar += nums[i]
+        # Store the sum from [0, i] in the sums array
+        sums[i] = sumSoFar
+
+    print(sums)
+    
+    # Initialize a dictionary that stores each sum's count.
+    duplicates = {}
+    # Check for duplicates, or 0.
+    for i in range(0, len(sums)):
+        print(duplicates)
+        if sums[i] == 0:
+            return True
+        if sums[i] not in duplicates:
+            duplicates[sums[i]] = 1
+        else:
+            duplicates[sums[i]] += 1
+            if duplicates[sums[i]] == 2:
+                return True
+    return False
+
+
+    # Time: 0(n)
+    # Space: O(n)
+    
