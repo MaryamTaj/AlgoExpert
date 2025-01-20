@@ -1,0 +1,14 @@
+def arrayOfProducts(array):
+    products = [1 for _ in range(len(array))]
+    
+    for i in range(0, len(array)):
+        for j in range(0, len(array)):
+            if i == j:
+                continue
+            else:
+                products[i] *= array[j]
+
+    return products
+
+# Time: O(n^2)
+# Space: O(n)
