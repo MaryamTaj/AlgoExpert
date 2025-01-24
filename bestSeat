@@ -1,0 +1,27 @@
+import math
+def bestSeat(seats):
+    bestSeat = -1
+    maxSpace = 0
+
+    l = 0
+    r = 1
+    while r < len(seats):
+        if seats[r] == 1:
+            currSpace = r - l - 1
+            
+            if currSpace > maxSpace:
+                maxSpace = currSpace
+                bestSeat = math.floor((l + r) / 2)
+
+            l = r
+            r = r + 1
+        
+        else:
+            r = r + 1
+
+    return bestSeat
+            
+        
+        
+    
+
