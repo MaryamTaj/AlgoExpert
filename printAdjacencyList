@@ -1,0 +1,21 @@
+    def printGraph(self, V : int, edges : List[List[int]]) -> List[List[int]]:
+        # code here
+        # Initialize an adjacency list
+        adjacency_list = [[] for vertex in range(V)]
+        
+        # Iterate through each edge
+        for u,v in edges:
+            # Add v to u's adjacency list
+            adjacency_list[u].append(v)
+            
+            # Add u to v's adjacency list
+            adjacency_list[v].append(u)
+        
+        return adjacency_list
+        
+        # Analysis:
+        # Time: O(V+E)
+        # Space: O(V+E). Notice that we store v adjacency lists (i.e., 1 for 
+        # each vertex), and we represent each edge twice (i.e., 0:[1] and 
+        # 1: [0]). In analyzing space complexity, you must account for 
+        # both the adjacency structure and the number of elements stored.
