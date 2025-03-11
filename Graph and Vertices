@@ -1,0 +1,49 @@
+def count(self, n):
+        # Code here
+        if n == 1:
+            return 1
+        elif n == 2:
+            return 2
+        else:
+            return self.count(n - 1) * 2** (n - 1)
+        
+        # Intution:
+        # Suppose you have 2 nodes, A and B
+        # Then, you have 2 possible graphs:
+        # Graph 1: You could have A and B without an edge between them.
+        # Graph 2: You could have A and B with an edge between them.
+        
+        # Suppose you have a third node C now.
+        # Using the 2 graphs from earlier,
+        # Graph 1: You could have A and B without an edge between them.
+            # Graph 1A: You could add an edge between A and C
+            # Graph 1B: You could add an edge between B and C
+            # Graph 1C: You could add no edges between C and other nodes.
+            # Graph 1D: You could add two edges between A and C, and B and C.
+        # Graph 2: You could have A and B with an edge between them.
+            # Graph 2A: You could add an edge between A and C
+            # Graph 2B: You could add an edge between B and C
+            # Graph 2C: You could add no edges between C and other nodes.
+            # Graph 2D: You could add two edges between A and C, and B and C.
+        
+        # If you extend the pattern, you notice the following:
+        # Let self.count(n-1) = # of graphs formed from n - 1 vertices. 
+        # Let s be such a graph formed from n - 1 vertices.
+        # Suppose you add the nth node. You could have an edge between
+        # the nth node and a vertex in s, or not = 2^(n-1) possibilities.
+        # Since there are self.count(n - 1) such graphs, the total # of
+        # possible graphs is self.count(n - 1) * 2 ^ (n - 1)
+        
+        # Analysis:
+        # Time: 
+        # T(n) = T(n-1) + O(2^(n-1))
+        # If you expand this recurrence:
+        # T(n) = T(n-1) + 2^(n-1)
+        # T(n) = T(n-2) + 2^(n-2) + 2^(n-1)
+        # T(n) = T(n-3) + 2^(n-3) + 2^(n-2) + 2^(n-1)
+        # .....
+        # T(n) = T(1) + 2 + 2^2 + .......2^(n-1)
+        # T(n) = geometric series of 2^i from i = 0 to i = n-1 = 2^(n-1) - 1
+        # In other words, T(n) = O(2^n)
+        # Space: The maximum depth of recursion stack is from n to 1 = n => O(n)
+        
