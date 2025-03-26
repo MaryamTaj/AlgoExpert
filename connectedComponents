@@ -1,0 +1,37 @@
+        def DFS(i: int, visited):
+            for l, r in edges:
+                if l == i and not visited[r]:
+                    visited[r] = True
+                    DFS(r, visited)
+                elif r == i and not visited[l]:
+                    visited[l] = True
+                    DFS(l, visited)
+
+        def findChildren(i: int, visited):
+            children = []
+            for l,r in edges:
+                if l == i and not visited[r]:
+                    children.append(r)
+                elif r == i and not visited[l]:
+                    children.append(l)
+            return children
+
+        visited = [False for _ in range(n)]
+        numConnectedComponents = 0
+        for i in range(n):
+            if not visited[i]:
+                visited[i] = True
+                children = findChildren(i, visited)
+                print(f"node: {i}")
+                print(f"children: {children}")
+                print(f"visited: {visited}")
+                for child in children:
+                    visited[child] = True
+                    DFS(child, visited)
+                numConnectedComponents += 1
+        
+        return numConnectedComponents
+    # Iterate through each node
+    # For each unvisited node i, find its children (i.e., j s.t. i-j is an edge)
+    # Run DFS on each of its children
+    # numConnectedComponents += 1
