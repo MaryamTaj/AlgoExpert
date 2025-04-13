@@ -1,0 +1,38 @@
+class Solution:
+    def isCycle(self, V, adj):
+        def DFS(child, parent, visited):
+            for neighbor in adj[child]:
+                # Bubble back the information about 
+                # detecting a cycle. 
+                # Suppose you did not have the if
+                # DFS(neighbor, child, visited). You
+                # only had DFS(neighbor, child, visited)
+                # Then, even if DFS(neighbor, child, visited)
+                # detected a cycle and returned True, the for 
+                # loop would continue iterating through the 
+                # rest of the neighbors. It would not be able
+                # to do anything with the information.
+                if not visited[neighbor]:
+                    visited[neighbor] = True
+                    if DFS(neighbor, child, visited):
+                        return True
+                # You have detected a neighbor that
+                # has already been visited and is not
+                # the parent - cycle.
+                elif neighbor != parent:
+                    return True
+            
+            return False
+        
+        visited = [False for _ in range(V)]
+        # You want to run DFS on every unvisited node, 
+        # because the graph can be disconnected (i.e.,
+        # multiple components), and the cycle might
+        # not be in the component containing node 0.
+        # So you cannot simply use return DFS(0, -1, visited)
+        for i in range(V):
+            if not visited[i]:
+                visited[i] = True
+                if DFS(i, -1, visited):
+                    return True
+        return False
